@@ -57,16 +57,18 @@ with open(event_loc) as f:
                     scheduler.enter((int(val)+int(lastOpenTime))/1000,1,closeChannel, (str((index+1)/2),))
                     endTime = int(val)
                 
-
+ 
 print('Start: ', time.time())
-scheduler.run()
+
 #create the controller class
-vidcontrol = RaspiVidController(save_loc, args[3]*1000, False)
+vidcontrol = RaspiVidController(save_loc, int(args[3])*1000, False)
 
 #start raspivid
 vidcontrol.start()
-
+print ('video started')
 #DO SOME STUFF
+scheduler.run()
+
 
 #stop raspivid 
 vidcontrol.stopController()
